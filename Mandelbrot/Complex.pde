@@ -15,6 +15,14 @@ class Complex{
   public double length2(){
     return Rel*Rel + Img*Img; 
   }
+  public Complex powerN(int n){
+    // zn = z^n
+    Complex zn = this;
+    for (int j = 1; j<n; j++){
+      zn = zn.multComp(this);
+    }
+    return zn;
+  }
   
   
 }

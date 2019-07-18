@@ -3,11 +3,13 @@ int squareSize = 1000;
 double centerX = 0;
 double centerY = 0;
 double imageWidth = 1;
-int pixelSize = 6;
-int maxLoops = 400;
+int pixelSize = 8;
+int maxLoops = 50;
+int n = 2;
+Complex c = new Complex (0, -0.8);
   
   
-void setup(){
+void setup(){  
   size(1000, 1000);
   background(255);
   noStroke();
@@ -17,11 +19,14 @@ void setup(){
 void redrawFract(){
   for (double x = centerX-imageWidth; x < centerX+imageWidth; x+= 2*pixelSize * imageWidth/squareSize) {
     for (double y = centerY-imageWidth; y < centerY+imageWidth; y+=2*pixelSize * imageWidth/squareSize) {
-      Complex z0 = new Complex (x, y);
-      Complex zn = new Complex (x, y);
+      // Uncomment for mandelbrot set
+      // c = new COmplex (x, y);
+      Complex z = new Complex (x, y);
+      Complex zn = z;
       int i = 0;
       while (i < maxLoops && zn.length2() < 100){
-        zn = (zn.multComp(zn)).addComp(z0);
+
+        zn = zn.powerN(n).addComp(c);
         
         i++;
       }
@@ -61,21 +66,30 @@ void keyPressed(){
     redraw = true;
   }
     if (key == '3'){
-    pixelSize = 3;
+    pixelSize = 4;
     redraw = true;;
   }
     if (key == '4'){
-    pixelSize = 4;
+    pixelSize = 8;
     redraw = true;
   }
-    if (key == '5'){
-    pixelSize = 5;
-    redraw = true;;
-  }
-    if (key == '6'){
-    pixelSize = 6;
+  if (keyCode == UP){
+    c = new Complex(c.Rel, c.Img-0.01);
     redraw = true;
   }
+    if (keyCode == DOWN){
+    c = new Complex(c.Rel, c.Img+0.01);
+    redraw = true;
+  }
+  if (keyCode == LEFT){
+    c = new Complex(c.Rel-0.01, c.Img);
+    redraw = true;
+  }
+    if (keyCode == RIGHT){
+    c = new Complex(c.Rel+0.01, c.Img);
+    redraw = true;
+  }
+    
 }
 
 void mouseWheel(MouseEvent event){
@@ -94,5 +108,6 @@ void draw(){
     background(255);
     redrawFract(); 
     redraw = false;
+    print("c is:" + c.Rel + ' '+ c.Img + "\n");
   }
 }
