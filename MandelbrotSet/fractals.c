@@ -10,11 +10,11 @@ int main(){
   int x = 0;
   double zr, zc, znr, znc, znrn, zncn;
 
-  for (double y = -1; y <= 1; y+=0.0001) {
+  for (double y = -1; y <= 1; y+=0.004) {
     if (x%100 == 0){
       printf("%d\n", x/100);
     }
-    for (double x = -1; x <= 1; x+=0.0001) {
+    for (double x = -1; x <= 1; x+=0.004) {
       zr = x;
       zc = y;
       znr = x;

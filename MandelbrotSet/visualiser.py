@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 
-img = Image.new('RGB', (20000, 20000), color = "black")
+img = Image.new('RGB', (500, 500), color = "black")
 d = ImageDraw.Draw(img)
 
 f = open("test.txt", "r")
